@@ -40,6 +40,7 @@ public class RadioButtonsDemo {
         label1 = new JLabel("Select an option:");
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         labelPanel.add(label1);
+        labelPanel.setBackground(Color.ORANGE);
         mainContentPane.add(labelPanel);
 
         label2 = new JLabel("");
@@ -59,6 +60,7 @@ public class RadioButtonsDemo {
         radioButtonsPanel.add(radioButton1);
         radioButtonsPanel.add(radioButton2);
         radioButtonsPanel.add(radioButton3);
+        radioButtonsPanel.setBackground(Color.ORANGE);
         mainContentPane.add(radioButtonsPanel);
 
         // Add buttons to the content pane
@@ -70,6 +72,7 @@ public class RadioButtonsDemo {
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttonsPanel.add(button1);
         buttonsPanel.add(button2);
+        buttonsPanel.setBackground(Color.ORANGE);
         mainContentPane.add(buttonsPanel);
 
         // Add item listener to radio buttons
@@ -94,10 +97,11 @@ public class RadioButtonsDemo {
         submitButton = new JButton("Organize");
         JPanel submitButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         submitButtonPanel.add(submitButton);
+        submitButtonPanel.setBackground(Color.ORANGE);
         mainContentPane.add(submitButtonPanel);
 
         mainContentPane.setLayout(new BoxLayout(mainContentPane, BoxLayout.Y_AXIS));
-
+        mainWindow.getContentPane().setBackground(Color.BLUE);
         // Set the size and location of the main window
         mainWindow.setSize(400, 200);
         mainWindow.setLocationRelativeTo(null);
