@@ -13,7 +13,7 @@ public class FileOrganizer2 {
             }
         });
     }
-    private static void createAndShowGUI() {
+    public static void createAndShowGUI() {
         // Set the Nimbus look and feel
         try {
 //            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
