@@ -20,6 +20,15 @@ public class RadioButtonsDemo {
     private static JLabel label1, label2;
     private static JRadioButton radioButton1, radioButton2, radioButton3;
     private static JButton button1, button2, submitButton;
+    private static JFileChooser chooser;
+    private File fromPath;
+    private File toPath;
+    private boolean ackFlag = true;
+    private boolean destinationFlag = true;
+    private boolean startFlag = true;
+    private static boolean isMonthRequire = false;
+
+
 
     public static void main(String[] args) {
         // Set the Nimbus look and feel
@@ -82,6 +91,10 @@ public class RadioButtonsDemo {
                     if (radioButton1.isSelected() || radioButton2.isSelected()) {
                         button1.setVisible(true);
                         button2.setVisible(true);
+                        button2.setEnabled(false);
+                        if(radioButton2.isSelected()) {
+                            isMonthRequire=true;
+                        }
                     } else {
                         button2.setVisible(false);
                     }
@@ -109,6 +122,63 @@ public class RadioButtonsDemo {
         // Show the main window
         mainWindow.setVisible(true);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        new RadioButtonsDemo().addListeners();
     }
+
+    private void addListeners() {
+        button1.addActionListener(actionListener -> {
+            chooser = new JFileChooser();
+            chooser.setDialogTitle("Select source folder");
+            chooser.setMultiSelectionEnabled(false);
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnVal = chooser.showOpenDialog(null);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                fromPath = new File(chooser.getSelectedFile().getPath());
+                ackFlag = false;
+                destinationFlag = true;
+                button2.setEnabled(true);
+                System.err.println(fromPath);
+            }
+        });
+
+        button2.addActionListener(actionListener -> {
+            chooser.setDialogTitle("select destination folder");
+            chooser.setMultiSelectionEnabled(false);
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int returnVal = chooser.showOpenDialog(null);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                toPath = new File(chooser.getSelectedFile().getPath());
+                System.err.println(toPath);
+                startFlag = true;
+            }
+        });
+
+        submitButton.addActionListener(actionListener -> {
+            try {
+                FOMechanism.startFileProcessing(getFromPath(), getToPath(), isMonthRequire);
+                destinationFlag = false;
+                startFlag = false;
+                ackFlag = true;
+//                saveFolderButton.setVisible(destinationFlag);
+//                fileOrganizerButton.setVisible(startFlag);
+//                ack.setText("<html><span style='color: blue;'>File Organized Successfully!</span><p> Source Path: "+fromPath+"<br> Destination Path: "+toPath+"</html>");
+//                ack.setVisible(ackFlag);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+    }
+
+    public File getFromPath() {
+        return fromPath;
+    }
+
+    public File getToPath() {
+        return toPath;
+    }
+
 }
 
