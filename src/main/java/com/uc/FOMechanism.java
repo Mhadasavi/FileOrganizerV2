@@ -20,12 +20,12 @@
 
         final static String LOG_FILE_URL = "C:\\Users\\" + USER + "\\Documents\\output.txt";
 
-        static void startFileProcessing(File fromPath, File toPath) throws IOException {
+        static void startFileProcessing(File fromPath, File toPath, boolean isMonthRequire) throws IOException {
             int total;
             if (fromPath == null) {
                 return;
             }
-            total = FileOrganizer(fromPath, toPath);
+            total = FileOrganizer(fromPath, toPath, isMonthRequire);
             createLogs(fromPath, toPath, total);
         }
 
@@ -42,7 +42,7 @@
             }
         }
 
-        static int FileOrganizer(File path, File toPath) throws IOException {
+        static int FileOrganizer(File path, File toPath, boolean isMonthRequire) throws IOException {
             int fileCount = 0;
             File[] fileList = path.listFiles();
             if (fileList == null) {
@@ -58,23 +58,25 @@
                     int year = time.getYear();
                     String month = time.getMonth().name();
                     month = WordUtils.capitalizeFully(month);
-                    fileMover(file, toPath, year, month);
+                    fileMover(file, toPath, year, month, isMonthRequire);
                     fileCount++;
                 }
             }
             return fileCount;
         }
 
-        private static void fileMover(File file, File toPath, int year, String month) throws IOException {
+        private static void fileMover(File file, File toPath, int year, String month, boolean isMonthRequire) throws IOException {
             String fileName = file.getName();
             File directoryYear = new File(toPath.getPath() + "\\" + year);
             if (!directoryYear.exists()) {
                 boolean res = directoryYear.mkdir();
             }
-//            File directory = new File(directoryYear.toPath() + "\\" + month);
-//            if (!directory.exists()) {
-//                boolean res = directory.mkdir();
-//            }
+            if(isMonthRequire) {
+                File directory = new File(directoryYear.toPath() + "\\" + month);
+                if (!directory.exists()) {
+                    boolean res = directory.mkdir();
+                }
+            }
             String to = directoryYear + "\\" + fileName;
             Files.move(file.toPath(), Path.of(to), StandardCopyOption.REPLACE_EXISTING);
         }

@@ -1,0 +1,4 @@
+Log: Sun Mar 12 10:55:01 IST 2023Sun Mar 12 10:55:01 IST 2023
+12 total files moved from /Users/upkar.chaudhary/Downloads/test to location /Users/upkar.chaudhary/Downloads/test
+Log: Sun Mar 12 10:57:12 IST 2023Sun Mar 12 10:57:12 IST 2023
+2 total files moved from /Users/upkar.chaudhary/Downloads/test\2023\pptx to location /Users/upkar.chaudhary/Downloads/test\2023\pdf
