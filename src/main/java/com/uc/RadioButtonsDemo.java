@@ -14,6 +14,7 @@ import java.io.IOException;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 
 public class RadioButtonsDemo {
@@ -112,6 +113,15 @@ public class RadioButtonsDemo {
         submitButtonPanel.add(submitButton);
         submitButtonPanel.setBackground(Color.ORANGE);
         mainContentPane.add(submitButtonPanel);
+        String data[][] = {{"001","vinod","Bihar","India","Biology","65","First"}};
+
+                String col[] = {"Roll","Name","State","country","Math","Marks","Grade"};
+        JTable table = new JTable(data,col);
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(Color.yellow);
+        JScrollPane pane = new JScrollPane(table);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        mainContentPane.add((pane));
 
         mainContentPane.setLayout(new BoxLayout(mainContentPane, BoxLayout.Y_AXIS));
         mainWindow.getContentPane().setBackground(Color.BLUE);
@@ -121,6 +131,7 @@ public class RadioButtonsDemo {
 
         // Show the main window
         mainWindow.setVisible(true);
+        mainWindow.setResizable(false);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         new RadioButtonsDemo().addListeners();
