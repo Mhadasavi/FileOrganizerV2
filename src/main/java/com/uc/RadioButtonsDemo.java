@@ -14,7 +14,9 @@ import java.io.IOException;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
+import java.util.Arrays;
 
 public class RadioButtonsDemo {
     private static JLabel label1, label2;
@@ -23,11 +25,10 @@ public class RadioButtonsDemo {
     private static JFileChooser chooser;
     private File fromPath;
     private File toPath;
-    private boolean ackFlag = true;
-    private boolean destinationFlag = true;
+    private static boolean isTypeRequire = false;
+    private static boolean isYearRequire = false;
     private boolean startFlag = true;
     private static boolean isMonthRequire = false;
-
 
 
     public static void main(String[] args) {
@@ -88,15 +89,28 @@ public class RadioButtonsDemo {
         ItemListener itemListener = new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    if (radioButton1.isSelected() || radioButton2.isSelected()) {
+                    if (radioButton1.isSelected()) {
                         button1.setVisible(true);
                         button2.setVisible(true);
                         button2.setEnabled(false);
-                        if(radioButton2.isSelected()) {
-                            isMonthRequire=true;
-                        }
+                        isYearRequire=true;
+                        isTypeRequire=false;
+                        isMonthRequire=false;
+                    }
+                    if (radioButton2.isSelected()) {
+                        button1.setVisible(true);
+                        button2.setVisible(true);
+                        button2.setEnabled(false);
+                        isYearRequire=false;
+                        isTypeRequire=false;
+                        isMonthRequire=true;
                     } else {
-                        button2.setVisible(false);
+                        button1.setVisible(true);
+                        button2.setVisible(true);
+                        button2.setEnabled(false);
+                        isYearRequire=false;
+                        isTypeRequire=true;
+                        isMonthRequire=false;
                     }
 //                    label2.setText("You selected " + ((JRadioButton) e.getItem()).getText());
                 }
@@ -112,6 +126,15 @@ public class RadioButtonsDemo {
         submitButtonPanel.add(submitButton);
         submitButtonPanel.setBackground(Color.ORANGE);
         mainContentPane.add(submitButtonPanel);
+        String data[][] = {{"001", "vinod", "Bihar", "India", "Biology", "65", "First"}};
+
+        String col[] = {"Roll", "Name", "State", "country", "Math", "Marks", "Grade"};
+        JTable table = new JTable(data, col);
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(Color.yellow);
+        JScrollPane pane = new JScrollPane(table);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        mainContentPane.add((pane));
 
         mainContentPane.setLayout(new BoxLayout(mainContentPane, BoxLayout.Y_AXIS));
         mainWindow.getContentPane().setBackground(Color.BLUE);
@@ -121,6 +144,7 @@ public class RadioButtonsDemo {
 
         // Show the main window
         mainWindow.setVisible(true);
+        mainWindow.setResizable(false);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         new RadioButtonsDemo().addListeners();
@@ -136,8 +160,8 @@ public class RadioButtonsDemo {
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 fromPath = new File(chooser.getSelectedFile().getPath());
-                ackFlag = false;
-                destinationFlag = true;
+                //ackFlag = false;
+//                destinationFlag = true;
                 button2.setEnabled(true);
                 System.err.println(fromPath);
             }
@@ -158,10 +182,10 @@ public class RadioButtonsDemo {
 
         submitButton.addActionListener(actionListener -> {
             try {
-                FOMechanism.startFileProcessing(getFromPath(), getToPath(), isMonthRequire);
-                destinationFlag = false;
+                FOMechanism.startFileProcessing(getFromPath(), getToPath(), Arrays.asList(isYearRequire, isMonthRequire, isTypeRequire));
+//                destinationFlag = false;
                 startFlag = false;
-                ackFlag = true;
+//                ackFlag = true;
 //                saveFolderButton.setVisible(destinationFlag);
 //                fileOrganizerButton.setVisible(startFlag);
 //                ack.setText("<html><span style='color: blue;'>File Organized Successfully!</span><p> Source Path: "+fromPath+"<br> Destination Path: "+toPath+"</html>");
