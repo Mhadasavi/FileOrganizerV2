@@ -77,19 +77,19 @@ public class FOMechanism {
 
     private static long fileMover(File file, File toPath, int year, String month, List<Boolean> userOption) throws IOException {
         String fileName = file.getName();
-        File directoryYear = new File(toPath.getPath() + "//" + year);
+        File directoryYear = new File(toPath.getPath() + File.separator + year);
         //Path path=Paths.get(file.getAbsolutePath());
         long fileSize = Files.size(Paths.get(file.getAbsolutePath())) / 1024;
         String to = directoryYear.toString();
         if (userOption.get(0)) {
             if (!directoryYear.exists()) {
-                directoryYear.mkdir();
+                boolean res = directoryYear.mkdirs();
             }
         }
         if (userOption.get(1)) {
-            File monthDirectory = new File(directoryYear.toPath() + "//" + month);
+            File monthDirectory = new File(directoryYear.getPath() + File.separator + month);
             if (!monthDirectory.exists()) {
-                monthDirectory.mkdir();
+                boolean res = monthDirectory.mkdirs();
             }
             to = monthDirectory.toString();
         }
@@ -98,14 +98,18 @@ public class FOMechanism {
             if (type != null) {
                 File typeDir = new File(toPath.getPath() + File.separator + type);
                 if (!typeDir.exists()) {
-                    typeDir.mkdir();
+                    boolean res = typeDir.mkdirs();
                 }
                 to = typeDir.toString();
             }
         }
-        to = to + "//" + fileName;
-        if (file.exists() && !file.getName().equals(".DS_Store")) {
-            Files.move(file.toPath(), Path.of(to), StandardCopyOption.REPLACE_EXISTING);
+        to = to + File.separator + fileName;
+        if (file.exists()) {
+            try {
+                Files.move(file.toPath(), Path.of(to), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
         }
         return fileSize;
     }

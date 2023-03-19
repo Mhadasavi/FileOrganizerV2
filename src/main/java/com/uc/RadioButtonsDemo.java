@@ -76,8 +76,10 @@ public class RadioButtonsDemo {
         // Add buttons to the content pane
         button1 = new JButton("Browse");
         button1.setVisible(false);
+        button1.setBackground(Color.ORANGE);
         button2 = new JButton("Destination");
         button2.setVisible(false);
+        button2.setBackground(Color.ORANGE);
 
         JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttonsPanel.add(button1);
@@ -93,24 +95,25 @@ public class RadioButtonsDemo {
                         button1.setVisible(true);
                         button2.setVisible(true);
                         button2.setEnabled(false);
-                        isYearRequire=true;
-                        isTypeRequire=false;
-                        isMonthRequire=false;
+                        isYearRequire = true;
+                        isTypeRequire = false;
+                        isMonthRequire = false;
                     }
                     if (radioButton2.isSelected()) {
                         button1.setVisible(true);
                         button2.setVisible(true);
                         button2.setEnabled(false);
-                        isYearRequire=false;
-                        isTypeRequire=false;
-                        isMonthRequire=true;
-                    } else {
+                        isYearRequire = false;
+                        isTypeRequire = false;
+                        isMonthRequire = true;
+                    }
+                    if (radioButton3.isSelected()) {
                         button1.setVisible(true);
                         button2.setVisible(true);
                         button2.setEnabled(false);
-                        isYearRequire=false;
-                        isTypeRequire=true;
-                        isMonthRequire=false;
+                        isYearRequire = false;
+                        isTypeRequire = true;
+                        isMonthRequire = false;
                     }
 //                    label2.setText("You selected " + ((JRadioButton) e.getItem()).getText());
                 }
@@ -119,22 +122,26 @@ public class RadioButtonsDemo {
         radioButton1.addItemListener(itemListener);
         radioButton2.addItemListener(itemListener);
         radioButton3.addItemListener(itemListener);
+        radioButton1.setBackground(Color.ORANGE);
+        radioButton2.setBackground(Color.ORANGE);
+        radioButton3.setBackground(Color.ORANGE);
 
         // Add submit button to the content pane
         submitButton = new JButton("Organize");
+        submitButton.setBackground(Color.ORANGE);
         JPanel submitButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         submitButtonPanel.add(submitButton);
         submitButtonPanel.setBackground(Color.ORANGE);
         mainContentPane.add(submitButtonPanel);
-        String data[][] = {{"001", "vinod", "Bihar", "India", "Biology", "65", "First"}};
-
-        String col[] = {"Roll", "Name", "State", "country", "Math", "Marks", "Grade"};
-        JTable table = new JTable(data, col);
-        JTableHeader header = table.getTableHeader();
-        header.setBackground(Color.yellow);
-        JScrollPane pane = new JScrollPane(table);
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        mainContentPane.add((pane));
+//        String data[][] = {{"001", "vinod", "Bihar", "India", "Biology", "65", "First"}};
+//
+//        String col[] = {"Roll", "Name", "State", "country", "Math", "Marks", "Grade"};
+//        JTable table = new JTable(data, col);
+//        JTableHeader header = table.getTableHeader();
+//        header.setBackground(Color.yellow);
+//        JScrollPane pane = new JScrollPane(table);
+//        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+//        mainContentPane.add((pane));
 
         mainContentPane.setLayout(new BoxLayout(mainContentPane, BoxLayout.Y_AXIS));
         mainWindow.getContentPane().setBackground(Color.BLUE);
