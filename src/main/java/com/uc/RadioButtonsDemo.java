@@ -8,8 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -17,6 +16,8 @@ import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RadioButtonsDemo {
     private static JLabel label1, label2;
@@ -133,20 +134,22 @@ public class RadioButtonsDemo {
         submitButtonPanel.add(submitButton);
         submitButtonPanel.setBackground(Color.ORANGE);
         mainContentPane.add(submitButtonPanel);
-//        String data[][] = {{"001", "vinod", "Bihar", "India", "Biology", "65", "First"}};
-//
-//        String col[] = {"Roll", "Name", "State", "country", "Math", "Marks", "Grade"};
-//        JTable table = new JTable(data, col);
-//        JTableHeader header = table.getTableHeader();
-//        header.setBackground(Color.yellow);
-//        JScrollPane pane = new JScrollPane(table);
+
+
+        String[] col = {"Path", "Total Files", "Size", "Time taken", "Date"};
+        String[][] data = getLogs(col);
+        JTable table = new JTable(data, col);
+        JTableHeader header = table.getTableHeader();
+        header.setBackground(Color.yellow);
+        JScrollPane pane = new JScrollPane(table);
 //        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-//        mainContentPane.add((pane));
+        table.setSize(400, 400);
+        mainContentPane.add((pane));
 
         mainContentPane.setLayout(new BoxLayout(mainContentPane, BoxLayout.Y_AXIS));
         mainWindow.getContentPane().setBackground(Color.BLUE);
         // Set the size and location of the main window
-        mainWindow.setSize(400, 200);
+        mainWindow.setSize(600, 300);
         mainWindow.setLocationRelativeTo(null);
 
         // Show the main window
@@ -155,6 +158,55 @@ public class RadioButtonsDemo {
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         new RadioButtonsDemo().addListeners();
+    }
+
+    private static String[][] getLogs(String[] col) {
+        // String[] col = {"Path", "Total Files", "Size", "Time taken", "Date"};
+        String[][] data = new String[0][col.length]; // initialize the array with 0 rows
+        //String regex = "Moved (\\d+) files from ([^\\s]+) to ([^\\s]+)(?:\\s)?Total file size: (\\d+) Kilobytes. Time taken: (\\d+) ms. Date: (.+)";
+        String regex = "Moved (\\d+) files from ([^\\s]+) to ([^\\s]+(\\s+[^\\s]+)*).+Total file size: (\\d+) Kilobytes. Time taken: (\\d+) ms. Date: (.+)";
+
+        try (BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "//output.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+//                String[] temp = line.split("\\s+");
+//                String[] row = new String[col.length];
+//                row[0] = temp[6];
+//                row[1] = temp[1];
+//                row[2] = temp[10]+" MB";
+//                row[3] = temp[14]; //+ " " + temp[9];
+//                row[4] = temp[17];
+                if (line.matches(regex)) {
+                    Matcher matcher = Pattern.compile(regex).matcher(line);
+                    matcher.matches(); // this is necessary to populate the matcher object with the matched groups
+                    String[] row = new String[col.length];
+                    row[0] = matcher.group(3);
+                    row[1] = matcher.group(1);
+                    row[2] = matcher.group(4) + " Kilobytes";
+                    row[3] = matcher.group(5) + " ms";
+                    row[4] = matcher.group(6);
+                    data = addRowToArray(data, row);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//            // print the data array to verify that it was populated correctly
+//            for (String[] row : data) {
+//                for (String cell : row) {
+//                    System.out.print(cell + " ");
+//                }
+//                System.out.println();
+//            }
+        return data;
+    }
+
+    private static String[][] addRowToArray(String[][] array, String[] row) {
+        String[][] newArray = new String[array.length + 1][row.length];
+        System.arraycopy(array, 0, newArray, 0, array.length);
+        newArray[array.length] = row;
+        return newArray;
     }
 
     private void addListeners() {

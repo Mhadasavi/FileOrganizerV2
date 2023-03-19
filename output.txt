@@ -1,3 +1,4 @@
+Moved 66 files from L:\source\Data migration to L:\source\New Folder. Total file size: 98 Kilobytes. Time taken: 33 ms. Date: 2023-03-19 13:58:36
 Moved 2 files from /Users/upkar.chaudhary/Downloads/a/pdf to /Users/upkar.chaudhary/Downloads/a. Total file size: 1135 Kilobytes. Time taken: 46 ms. Date: 2023-03-18 22:32:04
 Moved 1 files from /Users/upkar.chaudhary/Downloads/a/csv to /Users/upkar.chaudhary/Downloads/a. Total file size: 4780 Kilobytes. Time taken: 1 ms. Date: 2023-03-18 22:32:43
 Moved 4 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 3162 Kilobytes. Time taken: 26660 ms. Date: 2023-03-18 22:56:43
@@ -21,3 +22,4 @@ Moved 0 files from L:\destination\jpg to L:\destination. Total file size: 0 Kilo
 Moved 1 files from L:\destination\xlsx to L:\destination. Total file size: 6 Kilobytes. Time taken: 960029 ms. Date: 2023-03-19 11:57:03
 Moved 1 files from L:\destination\2023 to L:\destination. Total file size: 6 Kilobytes. Time taken: 14686 ms. Date: 2023-03-19 11:59:24
 Moved 15 files from L:\destination\2022 to L:\source. Total file size: 32220 Kilobytes. Time taken: 7713 ms. Date: 2023-03-19 11:59:51
+
