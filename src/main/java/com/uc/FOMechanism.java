@@ -41,7 +41,7 @@ public class FOMechanism {
 
 //                outputStreamWriter.write("Log: " + Date.from(Instant.now()) + Time.from(Instant.now()) + "\n"
 //                        + total + " total files moved from " + fromPath + " to location " + toPath + "\n");
-            outputStreamWriter.write(String.format("Moved %d files from %s to %s. Total file size: %d Kilobytes. Time taken: %d ms. Date: %s\n",
+            outputStreamWriter.write(String.format("Moved %d files from %s to %s. Total file size: %d MB. Time taken: %d ms. Date: %s\n",
                     moveResult[0], fromPath, toPath, moveResult[1], timeTaken.toMillis(), getCurrentDate()));
             outputStreamWriter.close();
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class FOMechanism {
         String fileName = file.getName();
         File directoryYear = new File(toPath.getPath() + File.separator + year);
         //Path path=Paths.get(file.getAbsolutePath());
-        long fileSize = Files.size(Paths.get(file.getAbsolutePath())) / 1024;
+        long fileSize = Files.size(Paths.get(file.getAbsolutePath())) / (1000*1000);;
         String to = directoryYear.toString();
         if (userOption.get(0)) {
             if (!directoryYear.exists()) {
