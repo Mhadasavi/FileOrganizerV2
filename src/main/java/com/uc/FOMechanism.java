@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FOMechanism {
 
@@ -79,7 +81,9 @@ public class FOMechanism {
         String fileName = file.getName();
         File directoryYear = new File(toPath.getPath() + File.separator + year);
         //Path path=Paths.get(file.getAbsolutePath());
-        long fileSize = Files.size(Paths.get(file.getAbsolutePath())) / (1000*1000);;
+        //long fileSize = Files.size(Paths.get(file.getAbsolutePath())) / (1000*1000);
+        long fileSizeBytes = file.length();
+        long fileSize = fileSizeBytes / 1048576;
         String to = directoryYear.toString();
         if (userOption.get(0)) {
             if (!directoryYear.exists()) {
@@ -127,5 +131,43 @@ public class FOMechanism {
             type = fileName.substring(pos + 1).toLowerCase();
         }
         return type;
+    }
+
+    protected static String[][] getLogs(String[] col) {
+        String[][] data = new String[0][col.length]; // initialize the array with 0 rows
+        File file = new File(System.getProperty("user.dir") + "//output.txt");
+
+        try {
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = br.readLine()) != null) {
+                Pattern pattern = Pattern.compile("Moved (\\d+) files from (.*?) to (.*?). Total file size: (\\d+) MB. Time taken: (\\d+) ms. Date: (.*?)$");
+                Matcher matcher = pattern.matcher(line);
+                if (matcher.matches()) {
+                    String[] row = new String[col.length];
+                    // extract properties from regex groups
+                    row[0] = matcher.group(3);
+                    row[1] = matcher.group(1);
+                    row[2] = matcher.group(4) + " MB";
+                    row[3] = matcher.group(5) + " ms";
+                    row[4] = matcher.group(6);
+                    data = addRowToArray(data, row);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    private static String[][] addRowToArray(String[][] array, String[] row) {
+        String[][] newArray = new String[array.length + 1][row.length];
+        System.arraycopy(array, 0, newArray, 0, array.length);
+        newArray[array.length] = row;
+        return newArray;
     }
 }
