@@ -10,6 +10,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.*;
 
+import static com.uc.FOMechanism.getLogs;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 import javax.swing.*;
@@ -160,54 +161,6 @@ public class RadioButtonsDemo {
         new RadioButtonsDemo().addListeners();
     }
 
-    private static String[][] getLogs(String[] col) {
-        // String[] col = {"Path", "Total Files", "Size", "Time taken", "Date"};
-        String[][] data = new String[0][col.length]; // initialize the array with 0 rows
-        //String regex = "Moved (\\d+) files from ([^\\s]+) to ([^\\s]+)(?:\\s)?Total file size: (\\d+) Kilobytes. Time taken: (\\d+) ms. Date: (.+)";
-        String regex = "Moved (\\d+) files from ([^\\s]+) to ([^\\s]+(\\s+[^\\s]+)*).+Total file size: (\\d+) Kilobytes. Time taken: (\\d+) ms. Date: (.+)";
-
-        try (BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "//output.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-//                String[] temp = line.split("\\s+");
-//                String[] row = new String[col.length];
-//                row[0] = temp[6];
-//                row[1] = temp[1];
-//                row[2] = temp[10]+" MB";
-//                row[3] = temp[14]; //+ " " + temp[9];
-//                row[4] = temp[17];
-                if (line.matches(regex)) {
-                    Matcher matcher = Pattern.compile(regex).matcher(line);
-                    matcher.matches(); // this is necessary to populate the matcher object with the matched groups
-                    String[] row = new String[col.length];
-                    row[0] = matcher.group(3);
-                    row[1] = matcher.group(1);
-                    row[2] = matcher.group(4) + " Kilobytes";
-                    row[3] = matcher.group(5) + " ms";
-                    row[4] = matcher.group(6);
-                    data = addRowToArray(data, row);
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-//            // print the data array to verify that it was populated correctly
-//            for (String[] row : data) {
-//                for (String cell : row) {
-//                    System.out.print(cell + " ");
-//                }
-//                System.out.println();
-//            }
-        return data;
-    }
-
-    private static String[][] addRowToArray(String[][] array, String[] row) {
-        String[][] newArray = new String[array.length + 1][row.length];
-        System.arraycopy(array, 0, newArray, 0, array.length);
-        newArray[array.length] = row;
-        return newArray;
-    }
 
     private void addListeners() {
         button1.addActionListener(actionListener -> {
