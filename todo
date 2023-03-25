@@ -1,4 +1,4 @@
-1. display empty cells with no data (when we have less data like only 1 record)
+1. display empty cells with no data (when we have less data like only 1 record) - done
 2. adjust width of some columns
 3. Show success type message when completes
    else show error message.

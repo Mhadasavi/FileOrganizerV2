@@ -14,7 +14,9 @@ import static com.uc.FOMechanism.getLogs;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -83,11 +85,27 @@ public class RadioButtonsDemo {
         button2.setVisible(false);
         button2.setBackground(Color.ORANGE);
 
-        JPanel buttonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        submitButton = new JButton("Organize");
+        submitButton.setBackground(Color.ORANGE);
+        // Create an empty label with preferred width for the left space
+        JLabel leftSpace = new JLabel();
+        leftSpace.setPreferredSize(new Dimension(10, 50));
+        // Create an empty label with preferred width for the right space
+        JLabel rightSpace = new JLabel();
+        rightSpace.setPreferredSize(new Dimension(10, 50));
+
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.add(leftSpace);
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
         buttonsPanel.add(button1);
+        buttonsPanel.add(Box.createRigidArea(new Dimension(10, 0))); // add some spacing
         buttonsPanel.add(button2);
+        buttonsPanel.add(Box.createHorizontalGlue()); // align submitButton to the right
+        buttonsPanel.add(submitButton);
         buttonsPanel.setBackground(Color.ORANGE);
+        buttonsPanel.add(rightSpace);
         mainContentPane.add(buttonsPanel);
+
 
         // Add item listener to radio buttons
         ItemListener itemListener = new ItemListener() {
@@ -129,17 +147,19 @@ public class RadioButtonsDemo {
         radioButton3.setBackground(Color.ORANGE);
 
         // Add submit button to the content pane
-        submitButton = new JButton("Organize");
-        submitButton.setBackground(Color.ORANGE);
-        JPanel submitButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        submitButtonPanel.add(submitButton);
-        submitButtonPanel.setBackground(Color.ORANGE);
-        mainContentPane.add(submitButtonPanel);
+//        submitButton = new JButton("Organize");
+//        submitButton.setBackground(Color.ORANGE);
+//        JPanel submitButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+//        submitButton.setBounds(100,100,10,10);
+//        submitButtonPanel.add(submitButton);
+//        submitButtonPanel.setBackground(Color.ORANGE);
+//        mainContentPane.add(submitButtonPanel);
 
 
         String[] col = {"Path", "Total Files", "Size", "Time taken", "Date"};
         String[][] data = getLogs(col);
-        JTable table = new JTable(data, col);
+        TableModel model = new DefaultTableModel(data, col);
+        JTable table = new JTable(model);
         JTableHeader header = table.getTableHeader();
         header.setBackground(Color.yellow);
         JScrollPane pane = new JScrollPane(table);
@@ -195,13 +215,7 @@ public class RadioButtonsDemo {
         submitButton.addActionListener(actionListener -> {
             try {
                 FOMechanism.startFileProcessing(getFromPath(), getToPath(), Arrays.asList(isYearRequire, isMonthRequire, isTypeRequire));
-//                destinationFlag = false;
                 startFlag = false;
-//                ackFlag = true;
-//                saveFolderButton.setVisible(destinationFlag);
-//                fileOrganizerButton.setVisible(startFlag);
-//                ack.setText("<html><span style='color: blue;'>File Organized Successfully!</span><p> Source Path: "+fromPath+"<br> Destination Path: "+toPath+"</html>");
-//                ack.setVisible(ackFlag);
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
