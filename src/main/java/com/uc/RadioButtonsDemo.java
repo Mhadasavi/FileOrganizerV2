@@ -14,6 +14,8 @@ import static com.uc.FOMechanism.getLogs;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
@@ -146,29 +148,35 @@ public class RadioButtonsDemo {
         radioButton2.setBackground(Color.ORANGE);
         radioButton3.setBackground(Color.ORANGE);
 
-        // Add submit button to the content pane
-//        submitButton = new JButton("Organize");
-//        submitButton.setBackground(Color.ORANGE);
-//        JPanel submitButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-//        submitButton.setBounds(100,100,10,10);
-//        submitButtonPanel.add(submitButton);
-//        submitButtonPanel.setBackground(Color.ORANGE);
-//        mainContentPane.add(submitButtonPanel);
-
 
         String[] col = {"Path", "Total Files", "Size", "Time taken", "Date"};
         String[][] data = getLogs(col);
         TableModel model = new DefaultTableModel(data, col);
         JTable table = new JTable(model);
+        // set the column width for each column
+        table.getColumnModel().getColumn(0).setPreferredWidth(150);
+        table.getColumnModel().getColumn(1).setPreferredWidth(30);
+        table.getColumnModel().getColumn(2).setPreferredWidth(30);
+        table.getColumnModel().getColumn(3).setPreferredWidth(30);
+        table.getColumnModel().getColumn(4).setPreferredWidth(100);
+
+        Color color = Color.decode("#006699");
+        MatteBorder border = new MatteBorder(0, 0, 1, 0, color);
+        table.setShowHorizontalLines(true);
+        table.setGridColor(Color.LIGHT_GRAY);
+
         JTableHeader header = table.getTableHeader();
-        header.setBackground(Color.yellow);
+        header.setBorder(border);
         JScrollPane pane = new JScrollPane(table);
 //        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setSize(400, 400);
+        pane.setBorder(new MatteBorder(1, 0, 1, 0, color));
+        mainContentPane.setBorder(new MatteBorder(0, 0, 2, 0, color));
         mainContentPane.add((pane));
 
         mainContentPane.setLayout(new BoxLayout(mainContentPane, BoxLayout.Y_AXIS));
         mainWindow.getContentPane().setBackground(Color.BLUE);
+        mainWindow.setBackground(Color.CYAN);
         // Set the size and location of the main window
         mainWindow.setSize(600, 300);
         mainWindow.setLocationRelativeTo(null);

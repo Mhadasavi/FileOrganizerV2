@@ -160,7 +160,7 @@ public class FOMechanism {
 
     private static String[][] getBlankCellData(String[][] data) {
         // determine the number of blank rows needed
-        int numRows = 9; // total number of rows to display
+        int numRows = 10; // total number of rows to display
         int numDataRows = data.length; // number of rows with data
         int numBlankRows = numRows - numDataRows; // number of blank rows needed
         int colLength = 5;

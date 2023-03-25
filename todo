@@ -1,5 +1,5 @@
 1. display empty cells with no data (when we have less data like only 1 record) - done
-2. adjust width of some columns
+2. adjust width of some columns - done
 3. Show success type message when completes
    else show error message.
 4. When selects source, display a button that show a circular chart with size like a file manager
