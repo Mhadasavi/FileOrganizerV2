@@ -153,6 +153,12 @@ public class RadioButtonsDemo {
         String[][] data = getLogs(col);
         TableModel model = new DefaultTableModel(data, col);
         JTable table = new JTable(model);
+        // set the column width for each column
+        table.getColumnModel().getColumn(0).setPreferredWidth(150);
+        table.getColumnModel().getColumn(1).setPreferredWidth(30);
+        table.getColumnModel().getColumn(2).setPreferredWidth(30);
+        table.getColumnModel().getColumn(3).setPreferredWidth(30);
+        table.getColumnModel().getColumn(4).setPreferredWidth(100);
 
         Color color = Color.decode("#006699");
         MatteBorder border = new MatteBorder(0, 0, 1, 0, color);
