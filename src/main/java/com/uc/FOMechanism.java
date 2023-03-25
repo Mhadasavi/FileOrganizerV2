@@ -5,7 +5,6 @@ import org.apache.commons.lang3.text.WordUtils;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.Duration;
@@ -18,10 +17,7 @@ import java.util.regex.Pattern;
 
 public class FOMechanism {
 
-    final static String USER = "Dharm";
     static String jarPath = System.getProperty("user.dir") + "//output.txt";
-
-    ////final static String LOG_FILE_URL = "C:\\Users\\" + USER + "\\Documents\\output.txt";
 
     static void startFileProcessing(File fromPath, File toPath, List<Boolean> userOption) throws IOException {
         LocalDateTime startTime = LocalDateTime.now();
@@ -41,8 +37,6 @@ public class FOMechanism {
             OutputStream outputStream = new FileOutputStream(jarPath, true);
             Writer outputStreamWriter = new OutputStreamWriter(outputStream);
 
-//                outputStreamWriter.write("Log: " + Date.from(Instant.now()) + Time.from(Instant.now()) + "\n"
-//                        + total + " total files moved from " + fromPath + " to location " + toPath + "\n");
             outputStreamWriter.write(String.format("Moved %d files from %s to %s. Total file size: %d MB. Time taken: %d ms. Date: %s\n",
                     moveResult[0], fromPath, toPath, moveResult[1], timeTaken.toMillis(), getCurrentDate()));
             outputStreamWriter.close();
@@ -160,6 +154,29 @@ public class FOMechanism {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        return getBlankCellData(data);
+    }
+
+    private static String[][] getBlankCellData(String[][] data) {
+        // determine the number of blank rows needed
+        int numRows = 9; // total number of rows to display
+        int numDataRows = data.length; // number of rows with data
+        int numBlankRows = numRows - numDataRows; // number of blank rows needed
+        int colLength = 5;
+        if (numDataRows < numRows) {
+            // create an array of empty objects for the blank rows
+            String[][] blankRows = new String[numBlankRows][colLength];
+            for (int i = 0; i < numBlankRows; i++) {
+                for (int j = 0; j < colLength; j++) {
+                    blankRows[i][j] = ""; // set each cell in the blank row to an empty string
+                }
+            }
+            // combine the data and blank rows into a single array
+            String[][] allRows = new String[numRows][colLength];
+            System.arraycopy(data, 0, allRows, 0, numDataRows); // copy the data rows
+            System.arraycopy(blankRows, 0, allRows, numDataRows, numBlankRows); // copy the blank rows
+            return allRows;
         }
         return data;
     }
