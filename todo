@@ -1,9 +1,12 @@
 1. display empty cells with no data (when we have less data like only 1 record) - done
 2. adjust width of some columns - done
 3. Show success type message when completes
-   else show error message.
+   else show error message. - done
 4. When selects source, display a button that show a circular chart with size like a file manager
-5. improve look and feel of table
+5. improve look and feel of table - done
 6. file total size in table not lgtm. check it
 7. add a sorting filter on table's columns
 8. Add open folder button in table row to open the folder.
+
+phase-2
+1. add open folder button in success dialog box.

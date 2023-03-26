@@ -2,6 +2,7 @@ package com.uc;
 
 import org.apache.commons.lang3.text.WordUtils;
 
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,23 +22,35 @@ public class FOMechanism {
 
     static void startFileProcessing(File fromPath, File toPath, List<Boolean> userOption) throws IOException {
         LocalDateTime startTime = LocalDateTime.now();
-        int total;
+//        int total;
         if (fromPath == null) {
             return;
         }
-        long[] moveResult = FileOrganizer(fromPath, toPath, userOption);
+        String[] moveResult = FileOrganizer(fromPath, toPath, userOption);
         LocalDateTime endTime = LocalDateTime.now();
         Duration timeTaken = Duration.between(startTime, endTime);
-
-        createLogs(fromPath, toPath, moveResult, timeTaken);
+        if (moveResult.length > 0) {
+            successBox("Success", "Result");
+            createLogs(fromPath, toPath, moveResult, timeTaken);
+        } else {
+            errorBox("Error", "Result");
+        }
     }
 
-    private static void createLogs(File fromPath, File toPath, long[] moveResult, Duration timeTaken) {
+    private static void successBox(String infoMessage, String titleBar) {
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private static void errorBox(String infoMessage, String titleBar) {
+        JOptionPane.showMessageDialog(null, infoMessage, titleBar, JOptionPane.ERROR_MESSAGE);
+    }
+
+    private static void createLogs(File fromPath, File toPath, String[] moveResult, Duration timeTaken) {
         try {
             OutputStream outputStream = new FileOutputStream(jarPath, true);
             Writer outputStreamWriter = new OutputStreamWriter(outputStream);
 
-            outputStreamWriter.write(String.format("Moved %d files from %s to %s. Total file size: %d MB. Time taken: %d ms. Date: %s\n",
+            outputStreamWriter.write(String.format("Moved %s files from %s to %s. Total file size: %s MB. Time taken: %d ms. Date: %s\n",
                     moveResult[0], fromPath, toPath, moveResult[1], timeTaken.toMillis(), getCurrentDate()));
             outputStreamWriter.close();
         } catch (Exception e) {
@@ -45,9 +58,9 @@ public class FOMechanism {
         }
     }
 
-    static long[] FileOrganizer(File path, File toPath, List<Boolean> userOption) throws IOException {
+    static String[] FileOrganizer(File path, File toPath, List<Boolean> userOption) throws IOException {
         int fileCount = 0;
-        long totalSize = 0;
+        double totalSize = 0;
         File[] fileList = path.listFiles();
         if (fileList == null) {
             throw new IllegalArgumentException("No File Found");
@@ -63,21 +76,21 @@ public class FOMechanism {
                 int year = time.getYear();
                 String month = time.getMonth().name();
                 month = WordUtils.capitalizeFully(month);
-                long fileSize = fileMover(file, toPath, year, month, userOption);
+                double fileSize = fileMover(file, toPath, year, month, userOption);
                 totalSize += fileSize;
                 fileCount++;
             }
         }
-        return new long[]{fileCount, totalSize};
+        return new String[]{FOUtils.removeDecimalPlaces(fileCount,0), FOUtils.removeDecimalPlaces(totalSize,1)};
     }
 
-    private static long fileMover(File file, File toPath, int year, String month, List<Boolean> userOption) throws IOException {
+    private static double fileMover(File file, File toPath, int year, String month, List<Boolean> userOption) throws IOException {
         String fileName = file.getName();
         File directoryYear = new File(toPath.getPath() + File.separator + year);
         //Path path=Paths.get(file.getAbsolutePath());
         //long fileSize = Files.size(Paths.get(file.getAbsolutePath())) / (1000*1000);
-        long fileSizeBytes = file.length();
-        long fileSize = fileSizeBytes / 1048576;
+        double fileSizeBytes = file.length();
+        double fileSize = fileSizeBytes / 1048576;
         String to = directoryYear.toString();
         if (userOption.get(0)) {
             if (!directoryYear.exists()) {
@@ -138,7 +151,7 @@ public class FOMechanism {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while ((line = br.readLine()) != null) {
-                Pattern pattern = Pattern.compile("Moved (\\d+) files from (.*?) to (.*?). Total file size: (\\d+) MB. Time taken: (\\d+) ms. Date: (.*?)$");
+                Pattern pattern = Pattern.compile("Moved (.*?) files from (.*?) to (.*?). Total file size: (.*?) MB. Time taken: (\\d+) ms. Date: (.*?)$");
                 Matcher matcher = pattern.matcher(line);
                 if (matcher.matches()) {
                     String[] row = new String[col.length];

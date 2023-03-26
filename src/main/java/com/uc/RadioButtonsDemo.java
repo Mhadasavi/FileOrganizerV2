@@ -152,6 +152,7 @@ public class RadioButtonsDemo {
         String[] col = {"Path", "Total Files", "Size", "Time taken", "Date"};
         String[][] data = getLogs(col);
         TableModel model = new DefaultTableModel(data, col);
+//        model.fireTableDataChanged();
         JTable table = new JTable(model);
         // set the column width for each column
         table.getColumnModel().getColumn(0).setPreferredWidth(150);

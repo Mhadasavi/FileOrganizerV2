@@ -3,3 +3,9 @@ Moved 3 files from L:\source to L:\New Folder. Total file size: 2263 MB. Time ta
 
 
 
+Moved 2 files from /Users/upkar.chaudhary/Downloads/a/pdf to /Users/upkar.chaudhary/Downloads/a. Total file size: 0 MB. Time taken: 82 ms. Date: 2023-03-26 11:49:56
+Moved 2 files from /Users/upkar.chaudhary/Downloads/a/2023 to /Users/upkar.chaudhary/Downloads/a. Total file size: 0 MB. Time taken: 71 ms. Date: 2023-03-26 12:35:10
+Moved 4.000000 files from /Users/upkar.chaudhary/Downloads/a/2023 to /Users/upkar.chaudhary/Downloads/a. Total file size: 3.088128 MB. Time taken: 35 ms. Date: 2023-03-26 18:07:03
+Moved 4.000000 files from /Users/upkar.chaudhary/Downloads/a/2023 to /Users/upkar.chaudhary/Downloads/a/2023. Total file size: 3.088128 MB. Time taken: 53 ms. Date: 2023-03-26 18:21:44
+Moved 2 files from /Users/upkar.chaudhary/Downloads/a/2023 to /Users/upkar.chaudhary/Downloads/a/2023. Total file size: 0.0 MB. Time taken: 66 ms. Date: 2023-03-26 18:47:24
+Moved 4 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 3.1 MB. Time taken: 3 ms. Date: 2023-03-26 18:48:35
