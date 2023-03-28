@@ -32,8 +32,11 @@ public class FOMechanism {
         if (moveResult.length > 0) {
             successBox("Success", "Result");
             createLogs(fromPath, toPath, moveResult, timeTaken);
+            fromPath=null;
+            toPath=null;
         } else {
             errorBox("Error", "Result");
+            toPath=null;
         }
     }
 
@@ -86,7 +89,12 @@ public class FOMechanism {
 
     private static double fileMover(File file, File toPath, int year, String month, List<Boolean> userOption) throws IOException {
         String fileName = file.getName();
+        if(toPath==null)
+        {
+            errorBox("Please select destination", "Error");
+        }
         File directoryYear = new File(toPath.getPath() + File.separator + year);
+
         //Path path=Paths.get(file.getAbsolutePath());
         //long fileSize = Files.size(Paths.get(file.getAbsolutePath())) / (1000*1000);
         double fileSizeBytes = file.length();
@@ -120,6 +128,8 @@ public class FOMechanism {
                 Files.move(file.toPath(), Path.of(to), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException exception) {
                 exception.printStackTrace();
+                errorBox(exception.getMessage(),"Error");
+               throw exception;
             }
         }
         return fileSize;
