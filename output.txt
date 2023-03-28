@@ -9,3 +9,15 @@ Moved 4.000000 files from /Users/upkar.chaudhary/Downloads/a/2023 to /Users/upka
 Moved 4.000000 files from /Users/upkar.chaudhary/Downloads/a/2023 to /Users/upkar.chaudhary/Downloads/a/2023. Total file size: 3.088128 MB. Time taken: 53 ms. Date: 2023-03-26 18:21:44
 Moved 2 files from /Users/upkar.chaudhary/Downloads/a/2023 to /Users/upkar.chaudhary/Downloads/a/2023. Total file size: 0.0 MB. Time taken: 66 ms. Date: 2023-03-26 18:47:24
 Moved 4 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 3.1 MB. Time taken: 3 ms. Date: 2023-03-26 18:48:35
+Moved 5 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 61.6 MB. Time taken: 66 ms. Date: 2023-03-28 10:49:23
+Moved 1 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 4 ms. Date: 2023-03-28 10:49:35
+Moved 5 files from /Users/upkar.chaudhary/Downloads/a/2023/March to /Users/upkar.chaudhary/Downloads/a. Total file size: 61.6 MB. Time taken: 56 ms. Date: 2023-03-28 10:54:24
+Moved 0 files from /Users/upkar.chaudhary/Downloads/a/2023/March to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 0 ms. Date: 2023-03-28 10:55:00
+Moved 0 files from /Users/upkar.chaudhary/Downloads/a/2023/March to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 0 ms. Date: 2023-03-28 10:55:02
+Moved 5 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 60 ms. Date: 2023-03-28 21:56:39
+Moved 1 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 4 ms. Date: 2023-03-28 21:56:51
+Moved 2 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 4 ms. Date: 2023-03-28 21:58:14
+Moved 1 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 40910 ms. Date: 2023-03-28 22:01:18
+Moved 1 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 1045 ms. Date: 2023-03-28 22:01:21
+Moved 1 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 1624 ms. Date: 2023-03-28 22:04:12
+Moved 1 files from /Users/upkar.chaudhary/Downloads/a/2023/pptx to /Users/upkar.chaudhary/Downloads/a. Total file size: 2.0 MB. Time taken: 8 ms. Date: 2023-03-28 22:16:57
