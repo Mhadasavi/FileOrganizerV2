@@ -26,17 +26,17 @@ public class FOMechanism {
         if (fromPath == null) {
             return;
         }
-        String[] moveResult = FileOrganizer(fromPath, toPath, userOption);
+        String[] moveResult = FileOrganizer(fromPath, toPath, userOption, 0);
         LocalDateTime endTime = LocalDateTime.now();
         Duration timeTaken = Duration.between(startTime, endTime);
         if (moveResult.length > 0) {
             successBox("Success", "Result");
             createLogs(fromPath, toPath, moveResult, timeTaken);
-            fromPath=null;
-            toPath=null;
+            fromPath = null;
+            toPath = null;
         } else {
             errorBox("Error", "Result");
-            toPath=null;
+            toPath = null;
         }
     }
 
@@ -61,16 +61,15 @@ public class FOMechanism {
         }
     }
 
-    static String[] FileOrganizer(File path, File toPath, List<Boolean> userOption) throws IOException {
-        int fileCount = 0;
+    static String[] FileOrganizer(File path, File toPath, List<Boolean> userOption, int fileCount) throws IOException {
         double totalSize = 0;
         File[] fileList = path.listFiles();
         if (fileList == null) {
             throw new IllegalArgumentException("No File Found");
         }
-
+        // If source is a file, move it to destination folder
         for (File file : fileList) {
-            if (file != null) {
+            if (file != null && file.isFile()) {
                 BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
                 LocalDateTime time = attr.lastModifiedTime()
                         .toInstant()
@@ -82,15 +81,18 @@ public class FOMechanism {
                 double fileSize = fileMover(file, toPath, year, month, userOption);
                 totalSize += fileSize;
                 fileCount++;
+            } else if (file.isDirectory()) {
+                String[] result = FileOrganizer(file, toPath, userOption, fileCount);
+                fileCount = Integer.parseInt(result[0]);
+                totalSize += Double.parseDouble(result[1]);
             }
         }
-        return new String[]{FOUtils.removeDecimalPlaces(fileCount,0), FOUtils.removeDecimalPlaces(totalSize,1)};
+        return new String[]{FOUtils.removeDecimalPlaces(fileCount, 0), FOUtils.removeDecimalPlaces(totalSize, 1)};
     }
 
     private static double fileMover(File file, File toPath, int year, String month, List<Boolean> userOption) throws IOException {
         String fileName = file.getName();
-        if(toPath==null)
-        {
+        if (toPath == null) {
             errorBox("Please select destination", "Error");
         }
         File directoryYear = new File(toPath.getPath() + File.separator + year);
@@ -99,18 +101,19 @@ public class FOMechanism {
         //long fileSize = Files.size(Paths.get(file.getAbsolutePath())) / (1000*1000);
         double fileSizeBytes = file.length();
         double fileSize = fileSizeBytes / 1048576;
-        String to = directoryYear.toString();
+        String to = null;
         if (userOption.get(0)) {
             if (!directoryYear.exists()) {
                 boolean res = directoryYear.mkdirs();
             }
+            to = directoryYear.toString();
         }
         if (userOption.get(1)) {
             File monthDirectory = new File(directoryYear.getPath() + File.separator + month);
             if (!monthDirectory.exists()) {
                 boolean res = monthDirectory.mkdirs();
             }
-            to = monthDirectory.toString();
+            to = directoryYear.toString()+monthDirectory.toString();
         }
         if (userOption.get(2)) {
             String type = getFileType(file.getName());
@@ -120,6 +123,8 @@ public class FOMechanism {
                     boolean res = typeDir.mkdirs();
                 }
                 to = typeDir.toString();
+            }else {
+                to= toPath.getPath();
             }
         }
         to = to + File.separator + fileName;
@@ -128,8 +133,8 @@ public class FOMechanism {
                 Files.move(file.toPath(), Path.of(to), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException exception) {
                 exception.printStackTrace();
-                errorBox(exception.getMessage(),"Error");
-               throw exception;
+                errorBox(exception.getMessage(), "Error");
+                throw exception;
             }
         }
         return fileSize;

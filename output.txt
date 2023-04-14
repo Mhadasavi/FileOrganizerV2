@@ -21,3 +21,14 @@ Moved 1 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/
 Moved 1 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 1045 ms. Date: 2023-03-28 22:01:21
 Moved 1 files from /Users/upkar.chaudhary/Downloads/a to /Users/upkar.chaudhary/Downloads/a. Total file size: 0.0 MB. Time taken: 1624 ms. Date: 2023-03-28 22:04:12
 Moved 1 files from /Users/upkar.chaudhary/Downloads/a/2023/pptx to /Users/upkar.chaudhary/Downloads/a. Total file size: 2.0 MB. Time taken: 8 ms. Date: 2023-03-28 22:16:57
+Moved 0 files from L:\source to L:\destination. Total file size: 0.0 MB. Time taken: 330982 ms. Date: 2023-04-14 16:39:57
+Moved 1 files from L:\source to L:\destination. Total file size: 907.7 MB. Time taken: 403 ms. Date: 2023-04-14 16:40:49
+Moved 0 files from L:\destination to L:\source. Total file size: 0.0 MB. Time taken: 103 ms. Date: 2023-04-14 16:43:00
+Moved 678 files from L:\source to L:\destination. Total file size: 2405.6 MB. Time taken: 8426 ms. Date: 2023-04-14 17:06:19
+Moved 3 files from L:\source to L:\destination. Total file size: 0.6 MB. Time taken: 64536 ms. Date: 2023-04-14 17:15:45
+Moved 83 files from L:\source to L:\destination. Total file size: 2405.6 MB. Time taken: 37 ms. Date: 2023-04-14 17:27:21
+Moved 83 files from L:\destination to L:\source. Total file size: 2405.6 MB. Time taken: 42 ms. Date: 2023-04-14 17:28:24
+Moved 83 files from L:\source to L:\destination. Total file size: 2405.6 MB. Time taken: 51 ms. Date: 2023-04-14 17:29:05
+Moved 1 files from L:\source to L:\destination. Total file size: 13.8 MB. Time taken: 56234 ms. Date: 2023-04-14 17:35:16
+Moved 8411 files from K:\takeout-20230304T073016Z-001\Takeout to K:\New folder. Total file size: 8835.8 MB. Time taken: 33603 ms. Date: 2023-04-14 17:50:13
+Moved 3004 files from K:\takeout-20230406T040931Z-001 to K:\New folder. Total file size: 10187.6 MB. Time taken: 10068 ms. Date: 2023-04-14 17:52:34
